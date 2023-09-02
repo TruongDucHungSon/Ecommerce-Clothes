@@ -11,7 +11,9 @@ const Hero = () => {
       </div>
       <div className="hero-decs container">
         <Logo />
-        <h2 className="hero-title">The greatest story ever worn</h2>
+        <h2 className="hero-title">
+          The greatest story ever wornewqewq Update
+        </h2>
         <p className="hero-content">
           Celebrating 150 years of the SonKhan's 501 jean.
         </p>
