@@ -1,0 +1,79 @@
+@mixin truncate-multiline-new($line-number) {
+  display: -webkit-box;
+  -webkit-line-clamp: $line-number;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  &::before {
+    position: absolute;
+    content: "...";
+    bottom: 0;
+    right: 0;
+  }
+}
+
+@mixin abs-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin abs-center-x {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+@mixin abs-center-y {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+@mixin grid($number) {
+  display: grid;
+  grid-template-columns: repeat($number, 1fr);
+}
+
+@mixin flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin flex-center-ver {
+  display: flex;
+  align-items: center;
+}
+
+@mixin mobile {
+  @media screen and (max-width: $sm) {
+    @content;
+  }
+}
+
+@mixin table {
+  @media screen and (max-width: $md) {
+    @content;
+  }
+}
+@mixin laptop {
+  @media screen and (max-width: $lg) {
+    @content;
+  }
+}
+
+@mixin transition() {
+  transition: all;
+  transition-duration: 0.25s;
+  transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+@mixin hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+@mixin visible {
+  opacity: 1;
+  visibility: visible;
+}

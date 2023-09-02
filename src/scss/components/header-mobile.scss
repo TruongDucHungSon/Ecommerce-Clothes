@@ -1,0 +1,93 @@
+.header {
+  &-mb-group {
+    position: relative;
+  }
+  &-overlay {
+    transition: all 0.2s ease;
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.2s ease;
+    &.openOverlay {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+  &-mb-ic {
+    @include flex-center-ver;
+    justify-content: space-between;
+    gap: 24px;
+    & svg {
+      cursor: pointer;
+      @include flex-center-ver;
+      width: 22px;
+      height: 22px;
+      &:first-child {
+        transform: rotate(90deg);
+      }
+    }
+  }
+  &-mb-nav {
+    position: fixed;
+    @include flex-col;
+    width: 87%;
+    height: 100vh;
+    top: 0;
+    background-color: #fff;
+    z-index: 100;
+    padding: 20px 40px 120px 40px;
+  }
+  &-mb-top {
+    @include flex-center-ver;
+    justify-content: space-between;
+    height: 40px;
+  }
+  &-mb-menu {
+    padding: 25px 0 56px;
+    font-size: $font-size-xLarge;
+    line-height: $leading-6;
+    font-weight: $font-weight-Extrabold;
+    text-transform: uppercase;
+    border-bottom: 1px solid #e9e9e9;
+    & li {
+      padding-bottom: 32px;
+    }
+    & a {
+      color: #000;
+      letter-spacing: 0.04px;
+    }
+  }
+  &-mb-logo {
+    @include laptop {
+      margin-left: 0;
+    }
+  }
+  &-mb-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    padding-block: 40px;
+  }
+  &-mb-link {
+    font-size: $font-size-base;
+    line-height: $leading-6;
+  }
+  &-mb {
+    display: none;
+    @include flex-center-ver;
+    justify-content: space-between;
+    padding-inline: 4vw;
+    background-color: #fff;
+    height: 64px;
+    z-index: 100;
+    & > svg {
+      cursor: pointer;
+      margin-right: 50px;
+      vertical-align: middle;
+      width: 22px;
+      height: 22px;
+    }
+  }
+}

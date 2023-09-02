@@ -1,0 +1,79 @@
+.footer {
+  position: relative;
+  background-color: #f3f3f3;
+  &-group {
+    padding: 40px 0px 160px 0px;
+    border-top: 1px solid #e9e9e9;
+    @include table {
+      padding: 0;
+    }
+  }
+  &-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    @include table {
+      flex-direction: column;
+    }
+  }
+  &-box {
+    display: flex;
+    flex-wrap: wrap;
+    width: calc(100% / 5);
+    @include laptop {
+      width: calc(100% / 2);
+    }
+    @include table {
+      width: 100%;
+      border-bottom: 1px solid #e6e6e6;
+    }
+  }
+  &-end {
+    @include flex-center-ver;
+    justify-content: center;
+    width: 100%;
+    background-color: #f3f3f3;
+    padding-block: 30px;
+
+    & p {
+      font-size: $font-size-small;
+      line-height: calc($leading-6 - 4px);
+      color: #6e6e6e;
+    }
+  }
+  &-heading {
+    color: #000;
+    font-size: $font-size-base;
+    line-height: calc($leading-6 - 4px);
+    font-weight: $font-weight-bold;
+    margin-bottom: 16px;
+    @include table {
+      padding-block: 20px;
+      margin-bottom: 0;
+    }
+  }
+  &-link {
+    @include table {
+      @include hidden;
+      transition: all 0.2s ease;
+      overflow: hidden;
+      &.show {
+        @include visible;
+        transition-delay: 15ms;
+      }
+    }
+    & li {
+      font-size: $font-size-base;
+      line-height: calc($leading-6 - 4px);
+      margin-bottom: 14px;
+      & a {
+        transition: color 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        color: #6e6e6e;
+        &:hover {
+          color: #000;
+        }
+      }
+    }
+  }
+}

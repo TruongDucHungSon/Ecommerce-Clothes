@@ -1,0 +1,106 @@
+.title {
+  &-left {
+    text-align: left;
+    margin-top: 32px;
+    margin-bottom: 64px;
+  }
+}
+.buil {
+  margin-bottom: 72px;
+  &-group {
+    @include flex-col;
+    gap: 98px;
+  }
+  &-list {
+    @include flex-center-ver;
+    justify-content: space-between;
+    gap: 60px;
+    @include table {
+      width: 100%;
+      scroll-snap-type: x proximity;
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: space-between;
+      flex: none;
+      overflow: auto;
+      gap: 32px;
+    }
+  }
+  &-item {
+    cursor: pointer;
+    width: calc(100% / 3);
+    gap: 10px;
+    @include table {
+      overflow: hidden;
+      cursor: pointer;
+      @include flex-col;
+      flex: none;
+      scroll-snap-align: start;
+      width: calc(100% / 2 - 30px);
+    }
+  }
+
+  &-desc {
+    margin-top: 26px;
+    font-size: $font-size-base;
+    line-height: calc($leading-6 - 4px);
+    font-weight: $font-weight-base;
+    & span {
+      font-weight: $font-weight-bold;
+    }
+  }
+  &-form {
+    @include flex-col;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 68vw;
+    margin-left: auto;
+    margin-right: auto;
+
+    & h4 {
+      font-size: $font-size-5xl;
+      line-height: calc($leading-6 + 16px);
+      font-weight: $font-weight-Extrabold;
+      letter-spacing: 0.04em;
+      padding-bottom: 16px;
+      margin-bottom: 0;
+      text-transform: uppercase;
+      @include laptop {
+        font-size: $font-size-3xl;
+
+        width: 80vw;
+      }
+      & span {
+        color: #c41230;
+      }
+    }
+
+    & p {
+      font-size: $font-size-medium;
+      line-height: $leading-6;
+      padding-bottom: 24px;
+      width: 50vw;
+    }
+  }
+  &-feid {
+    @include flex-center-ver;
+    gap: 32px;
+    font-size: $font-size-medium;
+    line-height: $leading-6;
+    font-weight: $font-weight-bold;
+    padding-bottom: 5px;
+    @include laptop {
+      flex-direction: column;
+      gap: 20px;
+    }
+  }
+  &-sign,
+  &-login {
+    color: #000;
+    border-bottom: 2px solid #c7575e;
+    &:hover {
+      border-bottom: 3px solid #c7575e;
+    }
+  }
+}

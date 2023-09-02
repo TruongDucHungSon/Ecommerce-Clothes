@@ -1,0 +1,77 @@
+.hero {
+  &-img {
+    position: relative;
+    @include laptop {
+      margin-top: 0px;
+    }
+    & > img {
+      height: 864px;
+      @include laptop {
+        height: 550px;
+      }
+    }
+  }
+  &-decs {
+    position: absolute;
+    top: 9%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #fff;
+    @include laptop {
+      top: 5.6%;
+    }
+  }
+  &-title {
+    padding-top: 30px;
+    text-transform: uppercase;
+    font-size: $font-size-5xl;
+    letter-spacing: 10px;
+    font-weight: $font-weight-Extrabold;
+    max-width: 800px;
+    padding-bottom: 8px;
+    margin-left: auto;
+    margin-right: auto;
+    @include table {
+      width: 100%;
+      text-align: center;
+      font-size: $font-size-2xl;
+      letter-spacing: 5px;
+    }
+  }
+  &-content {
+    font-size: $font-size-medium;
+    font-weight: $font-weight-medium;
+    line-height: $leading-6;
+    padding-bottom: 30px;
+  }
+  &-nav {
+    @include flex-center-ver;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    @include table {
+    }
+  }
+  &-link {
+    font-size: $font-size-medium;
+    font-weight: $font-weight-bold;
+    line-height: $leading-6;
+    text-align: center;
+    padding: 12px 36px;
+    text-transform: uppercase;
+    color: rgb(0, 0, 0);
+    background: rgb(255, 255, 255);
+    border-radius: $rounded-sm;
+    @include transition;
+    @include laptop {
+      font-size: $font-size-base;
+      display: inline-block;
+
+      width: calc(100% / 1 - 16px);
+    }
+  }
+  &-link:hover {
+    background-color: rgba(255, 255, 255, 0.8);
+  }
+}

@@ -1,0 +1,90 @@
+.contact {
+  background-color: #f3f3f3;
+  padding: 72px 0px 40px 0px;
+  &-title {
+    color: #000;
+    font-size: $font-size-xLarge;
+    line-height: calc($leading-6 + 4px);
+    font-weight: $font-weight-bold;
+    padding-bottom: 24px;
+    @include laptop {
+      text-align: center;
+      padding-bottom: 42px;
+    }
+  }
+  &-group {
+    @include flex-center-ver;
+    justify-content: space-between;
+    @include laptop {
+      justify-content: center;
+      flex-direction: column;
+      gap: 20px;
+    }
+  }
+  &-lists {
+    width: 70%;
+    @include laptop {
+      width: 100%;
+      padding-left: 30px;
+    }
+  }
+  &-item {
+    @include flex-center-ver;
+    gap: 10px;
+    width: calc(100% / 2 - 10px);
+  }
+  &-form {
+    width: 25%;
+    color: #000;
+    @include laptop {
+      width: 100%;
+    }
+    & h4 {
+      font-weight: $font-weight-Extrabold;
+      font-size: $font-size-3xl;
+      line-height: calc($leading-6 + 10px);
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      @include laptop {
+        font-size: $font-size-2xl;
+      }
+    }
+    & span {
+      font-size: $font-size-base;
+      line-height: calc($leading-6 - 4px);
+      padding: 12px 0 24px 0;
+    }
+    & p {
+      margin-block: 20px;
+      font-size: $font-size-small;
+      line-height: 15px;
+      color: #6e6e6e;
+      & a {
+        font-weight: $font-weight-bold;
+        color: #6e6e6e;
+        text-decoration: underline;
+      }
+    }
+  }
+  &-input {
+    border: none;
+    margin-top: 12px;
+    width: 100%;
+    padding: 20px 0px 10px 14px;
+  }
+  &-submit {
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 700;
+    background-color: #070b21;
+    border: 0;
+    border-radius: 2px;
+    text-transform: none;
+    color: #fff;
+    width: 100%;
+    padding: 12px 16px;
+    transition: background-color 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+}

@@ -1,0 +1,382 @@
+.page {
+  &-detail-group {
+    margin-block: 120px;
+    @include flex-col;
+    @include laptop {
+      margin-top: 0;
+    }
+    @include laptop {
+      margin-top: 0;
+      margin-bottom: 30px;
+    }
+  }
+  &-detail-box {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-bottom: 70px;
+    border-bottom: 1px solid #e6e6e6;
+    gap: 30px;
+    @include table {
+      flex-direction: column;
+      padding-bottom: 30px;
+    }
+  }
+  &-detail-primary {
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+
+    @include laptop {
+      max-width: 60%;
+    }
+    @include table {
+      max-width: 100%;
+      flex-direction: column-reverse;
+    }
+  }
+  &-detail-img-small {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    @include table {
+      flex-direction: row;
+    }
+  }
+
+  &-detail-img {
+    @include flex-center-ver;
+    height: 700px;
+    max-width: 100%;
+    @include laptop {
+      width: 450px;
+      height: 450px;
+    }
+    @include table {
+      width: 100%;
+      height: 350px;
+    }
+  }
+  &-detail-secound {
+    width: 100%;
+  }
+  &-detail-icHeart {
+    cursor: pointer;
+    @include flex-center-ver;
+    justify-content: center;
+    background-color: #fff;
+    width: 50px;
+    height: 32px;
+    border-radius: 50%;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    @include table {
+      display: none;
+    }
+    & > svg {
+      font-size: $font-size-2xl;
+      font-weight: $font-weight-bold;
+    }
+  }
+  &-detail-desc {
+    @include flex-col;
+    @include table {
+      margin-top: 40px;
+      padding-inline: 30px;
+    }
+  }
+  &-detail-trademark {
+  }
+  &-detail-name {
+    color: rgb(0, 0, 0);
+    text-transform: uppercase;
+    line-height: calc($leading-6 - 4px);
+    font-size: $font-size-xLarge;
+    letter-spacing: 0.02em;
+    font-weight: $font-weight-bold;
+    margin-block: 9px;
+  }
+  &-detail-price {
+    font-size: $font-size-xLarge;
+    line-height: calc($leading-6 + 4px);
+    font-weight: $font-weight-bold;
+    padding-bottom: 9px;
+  }
+  &-detail-sale {
+    font-size: $font-size-base;
+    line-height: calc($leading-6 - 4px);
+    color: #c41320;
+    margin-bottom: 16px;
+  }
+  &-detail-size {
+    @include flex-col;
+    font-size: $font-size-base;
+    line-height: calc($leading-6 - 4px);
+    font-weight: $font-weight-bold;
+    gap: 14px;
+    padding-block: 30px;
+    border-top: 1px solid #e6e6e6;
+    border-bottom: 1px solid #e6e6e6;
+  }
+  &-detail-size-lists {
+    @include flex-center-ver;
+    gap: 8px;
+    & button {
+      color: #000;
+      cursor: pointer;
+      background-color: #fff;
+      text-transform: uppercase;
+      justify-content: center;
+      text-align: center;
+      font-size: $font-size-small;
+      line-height: calc($leading-6 - 4px);
+      padding: 4px;
+      width: 30px;
+      border-radius: $rounded-md;
+      height: 30px;
+      transition: all 0.3s ease-out;
+      &:hover {
+        background-color: rgb(224, 219, 219);
+      }
+      &.active-size {
+        background-color: none;
+        border: 2px solid #000;
+      }
+      @include table {
+        font-weight: normal;
+        font-size: $font-size-small;
+        height: 48px;
+        width: 48px;
+        border: 1px solid #e6e6e6;
+        border-radius: unset;
+      }
+    }
+  }
+  &-detail-payment {
+    padding-top: 30px;
+    padding-bottom: 22px;
+    @include flex-center-ver;
+    gap: 22px;
+    flex-wrap: wrap;
+  }
+  &-detail-box-img {
+    gap: 10px;
+    display: flex;
+    width: 100%;
+    max-width: 675px;
+    align-items: flex-start;
+    justify-content: flex-start;
+    @include table {
+      flex-direction: column-reverse;
+      width: 100%;
+    }
+  }
+  &-detail-img-small {
+    & div {
+      width: 120px;
+      height: 120px;
+    }
+  }
+  &-detail-item {
+    cursor: pointer;
+    width: calc(100% / 2 - 22px);
+    border: 2px solid #e6e6e6;
+    padding: 16px 18px;
+    text-align: left;
+    border-radius: $rounded-md;
+    line-height: calc($leading-6 - 4px);
+    &.active-btn {
+      border: 2px solid #000;
+      padding: 18px 20px;
+    }
+    @include laptop {
+      width: calc(100% / 1);
+    }
+
+    & p {
+      color: rgb(0, 0, 0);
+      font-size: $font-size-base;
+      font-weight: $font-weight-bold;
+      margin-bottom: 4px;
+    }
+    & span {
+      font-size: $font-size-small;
+      color: rgb(110, 110, 110);
+    }
+  }
+  &-detail-btn {
+    @include flex-center-ver;
+    gap: 16px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid #e6e6e6;
+    @include laptop {
+      flex-direction: column;
+    }
+    @include table {
+      padding-top: 100px;
+      padding: 8px 12px;
+      position: fixed;
+      right: 0;
+      left: 0;
+      bottom: 0;
+      flex-direction: row-reverse;
+      background-color: #fff;
+      justify-content: center;
+      z-index: 1000;
+      gap: 4px;
+      box-shadow: 0 2px 12px #00000040;
+      z-index: 100;
+    }
+  }
+  &-detail-btn-items {
+    cursor: pointer;
+    display: inline-block;
+    user-select: none;
+    vertical-align: middle;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 700;
+    background-color: rgb(7, 11, 33);
+    border-radius: 2px;
+    color: rgb(255, 255, 255);
+    width: 100%;
+    padding: 12px 16px;
+    transition: opacity 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s;
+    height: 100%;
+    &:hover {
+      opacity: 0.9;
+    }
+
+    @include table {
+      padding: 16px 16px;
+    }
+  }
+  &-detail-qty {
+    @include flex-center-ver;
+    gap: 8px;
+
+    @include laptop {
+      justify-content: space-between;
+      width: 100%;
+    }
+    @include table {
+      color: #fff;
+      background-color: #070b21;
+      justify-content: space-between;
+      width: 25%;
+      padding: 8px;
+      border-radius: $rounded-sm;
+    }
+    & button {
+      display: none;
+      @include table {
+        cursor: pointer;
+        color: #fff;
+        background-color: transparent;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        padding: 8px;
+        font-size: $font-size-2xl;
+      }
+    }
+    & div:nth-child(2) {
+      &.hide {
+        color: #ccc;
+      }
+    }
+    & div {
+      cursor: pointer;
+      @include flex-center-ver;
+      justify-content: center;
+      height: 40px;
+      width: 40px;
+      font-size: $font-size-large;
+      @include table {
+        display: none;
+      }
+    }
+  }
+  &-detail-bottom {
+    padding-block: 32px;
+    font-size: 12px;
+    line-height: 16px;
+  }
+  &-detail-quality {
+    margin-block: 32px;
+    gap: 20px;
+    display: none;
+    @include table {
+      @include flex-center-ver;
+    }
+    & > p {
+      font-size: $font-size-base;
+      font-weight: $font-weight-bold;
+    }
+    & > div {
+      font-size: $font-size-large;
+    }
+  }
+  &-detail-description {
+    margin-top: 65px;
+    display: flex;
+    align-items: flex-start;
+    gap: 246px;
+    @include laptop {
+      @include flex-col;
+      padding-left: 100px;
+      gap: 50px;
+    }
+    @include table {
+      padding-left: 60px;
+      gap: 30;
+    }
+    @include mobile {
+      padding-left: 30px;
+      gap: 30;
+    }
+  }
+  &-detail-description-primary {
+    width: 100%;
+    max-width: 540px;
+    color: rgb(0, 0, 0);
+    font-size: 20px;
+    padding-left: 100px;
+    line-height: 28px;
+    @include laptop {
+      font-weight: $font-weight-medium;
+      max-width: 90%;
+      padding-left: unset;
+    }
+  }
+  &-detail-description-seound {
+    width: 30%;
+    @include laptop {
+      padding-top: 30px;
+      border-top: 1px solid #333;
+    }
+  }
+  &-detail-description-items {
+    margin-bottom: 20px;
+    & h6 {
+      font-size: $font-size-medium;
+      font-weight: $font-weight-bold;
+      line-height: $leading-6;
+      margin-bottom: 9px;
+    }
+    & ul {
+      padding-left: 14px;
+    }
+    & ul > li {
+      list-style: unset;
+      font-size: $font-size-base;
+      line-height: $leading-6;
+      color: rgb(110, 110, 110);
+    }
+  }
+}
+
+.active-image {
+  border: 1.5px solid #000;
+}
