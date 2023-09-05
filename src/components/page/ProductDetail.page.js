@@ -10,7 +10,6 @@ import {
 } from "../../features/product/productSlice";
 import { useParams } from "react-router-dom";
 import { addToCart } from "./../../features/cart/CartSlice";
-import { http } from "../../api/http";
 
 // or only core styles
 
@@ -58,30 +57,6 @@ const ProductDetail = () => {
       setquatity(quatity - 1);
     }
   };
-  const userData = useSelector((state) => state.auth.userData);
-  // const handleFavoriteClick = async () => {
-  //   const favoritePr = {
-  //     userId: userData._id,
-  //     name: productDetail.name,
-  //     price: productDetail.price,
-  //     size: productDetail.size,
-  //     newprice: productDetail.newprice,
-  //     description: productDetail.description,
-  //     images: productDetail.images[0],
-  //   };
-  //   try {
-  //     const response = await http.request({
-  //       method: "POST",
-  //       url: "/product/favorite",
-  //       data: favoritePr,
-  //     });
-  //     if (response.message === "success") {
-  //       console.log("Add success");
-  //     }
-  //   } catch (error) {
-  //     console.error("Error:", error);
-  //   }
-  // };
 
   const handleAddToCart = () => {
     const itemToAdd = {

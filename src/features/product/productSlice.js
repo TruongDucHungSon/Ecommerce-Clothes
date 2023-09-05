@@ -38,18 +38,6 @@ export const fetchProductDetail = createAsyncThunk(
   }
 );
 
-export const postProductFavorite = createAsyncThunk(
-  "favoriteProduct/postfavoriteProduct",
-  async (data, thunkAPI) => {
-    try {
-      const response = await product.postProductFavorite(data);
-      return response;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.response.data);
-    }
-  }
-);
-
 const apiSlice = createSlice({
   name: "api",
   initialState: {
@@ -62,7 +50,6 @@ const apiSlice = createSlice({
     totalProducts: 0,
     pageSize: 0,
     activeImageIndex: 0,
-    favoritePr: [],
   },
   reducers: {
     setActiveImageIndex: (state, action) => {
@@ -103,9 +90,7 @@ const apiSlice = createSlice({
         state.totalProducts = action.payload.totalProducts;
         state.pageSize = action.payload.pageSize;
       })
-      .addCase(postProductFavorite.fulfilled, (state, action) => {
-        state.favoritePr = action.payload;
-      })
+
       .addCase(fetchProductByCategory.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;

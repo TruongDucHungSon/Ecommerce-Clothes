@@ -122,7 +122,7 @@ export default function Login() {
             </div>
             <input className="form-submit" type="submit" value="Join" />
             <span className="form-under" onClick={handOpenLogin}>
-              Log in with an existing account
+              Sign up with an existing account
             </span>
           </form>
         </div>
