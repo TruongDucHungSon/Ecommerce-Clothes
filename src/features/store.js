@@ -4,6 +4,7 @@ import categoryReducer from "./category/categorySlice";
 import cartReducer from "./cart/CartSlice";
 import modalReducer from "./modal/modalSlice";
 import authReducer from "./auth/authSlice";
+import orderReducer from "./oder/orderSlice";
 import storage from "redux-persist/lib/storage";
 import { combineReducers } from "@reduxjs/toolkit";
 import {
@@ -28,6 +29,7 @@ const rootReducer = combineReducers({
   cart: cartReducer,
   auth: authReducer,
   modal: modalReducer,
+  order: orderReducer,
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 

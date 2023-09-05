@@ -5,7 +5,7 @@ import { TbHeart } from "react-icons/tb";
 import { HiOutlineShoppingBag } from "react-icons/hi";
 import { CgSearch } from "react-icons/cg";
 import { GrLocationPin } from "react-icons/gr";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Cart from "./Cart";
 import HeaderMobile from "./Header.mobile";
@@ -15,11 +15,12 @@ import { useDispatch } from "react-redux";
 import { openLoginModal, openSignUpModal } from "../features/modal/modalSlice";
 import { useSelector } from "react-redux";
 import { clearUserData } from "../features/auth/authSlice";
-import { clearToken } from "../utils/cookieStorage";
+import { clearToken, isValidAccessToken } from "../utils/cookieStorage";
+
 const Header = () => {
   const user = useSelector((state) => state.auth.userData);
-  console.log(user);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [openBagCart, setOpenBagCart] = useState(false);
   // * handle open Bag Cart
   const handleOpenBag = () => {
@@ -35,7 +36,11 @@ const Header = () => {
   const handleopenSignUpModal = () => {
     dispatch(openSignUpModal());
   };
-
+  const checkAuth = () => {
+    const isValidToken = isValidAccessToken();
+    if (isValidToken) return navigate("/favorite");
+    dispatch(openLoginModal());
+  };
   const handleLogout = () => {
     clearToken();
     dispatch(clearUserData());
@@ -87,8 +92,16 @@ const Header = () => {
               />
             </div>
             <div className="header-action ">
-              <TbHeart size={24} />
-              <HiOutlineShoppingBag size={24} onClick={handleOpenBag} />
+              <TbHeart
+                size={24}
+                onClick={checkAuth}
+                style={{ cursor: "pointer" }}
+              />
+              <HiOutlineShoppingBag
+                size={24}
+                onClick={handleOpenBag}
+                style={{ cursor: "pointer" }}
+              />
             </div>
           </div>
         </nav>

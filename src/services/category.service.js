@@ -1,12 +1,9 @@
 import { http } from "../api/http";
 
 export const category = {
-  getCategories: (params) =>
+  getCategories: () =>
     http.request({
       method: "GET",
       url: "category",
-      params: {
-        ...params,
-      },
     }),
 };

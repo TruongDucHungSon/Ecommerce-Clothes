@@ -4,6 +4,7 @@ export const ROUTES = {
   PRODUCT: "/product",
   PRODUCTBYCATEGORY: "/product/category/:id",
   ORDER: "/oder",
+  YOURORDER: "myorder",
 
   profile: {
     "my-accout": "/profile/my-account",

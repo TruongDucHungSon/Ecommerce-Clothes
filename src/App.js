@@ -9,6 +9,7 @@ import ProductDetail from "./components/page/ProductDetail.page";
 import ProductsPage from "./components/page/Products.page";
 import Contact from "./components/Contact";
 import Order from "./components/page/Oder.page";
+import Myorder from "./components/page/MyOrder";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path={ROUTES.PRODUCTBYCATEGORY} element={<ProductsPage />} />
         <Route path={ROUTES.PRODUCT_DETAIL} element={<ProductDetail />} />
         <Route path={ROUTES.ORDER} element={<Order />} />
+        <Route path={ROUTES.YOURORDER} element={<Myorder />} />
       </Routes>
       <Contact />
       <Footer />

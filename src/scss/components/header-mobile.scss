@@ -38,7 +38,7 @@
     top: 0;
     background-color: #fff;
     z-index: 100;
-    padding: 20px 40px 120px 40px;
+    padding: 40px 40px 120px 40px;
   }
   &-mb-top {
     @include flex-center-ver;
@@ -46,7 +46,7 @@
     height: 40px;
   }
   &-mb-menu {
-    padding: 25px 0 56px;
+    padding-block: 56px;
     font-size: $font-size-xLarge;
     line-height: $leading-6;
     font-weight: $font-weight-Extrabold;

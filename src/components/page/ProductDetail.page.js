@@ -10,6 +10,7 @@ import {
 } from "../../features/product/productSlice";
 import { useParams } from "react-router-dom";
 import { addToCart } from "./../../features/cart/CartSlice";
+import { http } from "../../api/http";
 
 // or only core styles
 
@@ -57,13 +58,29 @@ const ProductDetail = () => {
       setquatity(quatity - 1);
     }
   };
-
-  // const productData = {
-  //   id: id,
-  //   name: productDetail.name,
-  //   price: productDetail.price,
-  //   size: productDetail.size,
-  //   newPrice: productDetail.newPrice,
+  const userData = useSelector((state) => state.auth.userData);
+  // const handleFavoriteClick = async () => {
+  //   const favoritePr = {
+  //     userId: userData._id,
+  //     name: productDetail.name,
+  //     price: productDetail.price,
+  //     size: productDetail.size,
+  //     newprice: productDetail.newprice,
+  //     description: productDetail.description,
+  //     images: productDetail.images[0],
+  //   };
+  //   try {
+  //     const response = await http.request({
+  //       method: "POST",
+  //       url: "/product/favorite",
+  //       data: favoritePr,
+  //     });
+  //     if (response.message === "success") {
+  //       console.log("Add success");
+  //     }
+  //   } catch (error) {
+  //     console.error("Error:", error);
+  //   }
   // };
 
   const handleAddToCart = () => {
@@ -72,9 +89,9 @@ const ProductDetail = () => {
       images: productDetail.images,
       name: productDetail.name,
       price: productDetail.price,
-      size: productDetail.size[activeItemId], // Kích thước đã chọn
-      stock: productDetail.stock, // Kích thước đã chọn
-      quantity: quatity, // Số lượng đã chọn
+      size: productDetail.size[activeItemId],
+      stock: productDetail.stock,
+      quantity: quatity,
     };
 
     dispatch(addToCart({ newItem: itemToAdd, quantity: quatity }));
@@ -102,7 +119,7 @@ const ProductDetail = () => {
               <img src={productDetail.images[activeImageIndex]} alt="" />
             </div>
             <div className="page-detail-icHeart">
-              <TbHeart />
+              <TbHeart style={{ cursor: "pointer" }} />
             </div>
           </div>
         </div>

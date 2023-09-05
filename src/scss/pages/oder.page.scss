@@ -119,6 +119,7 @@
       cursor: pointer;
     }
   }
+
   &-cart-number {
     font-size: 14px;
     line-height: 20px;
@@ -132,19 +133,26 @@
     gap: 32px;
   }
   &-cart-img {
-    width: 100px;
+    width: 120px;
     height: 120px;
   }
   &-cart-desc {
     font-size: 14px;
     line-height: 20px;
     color: #000;
+    width: 100%;
+    @include laptop {
+      width: fit-content;
+    }
     display: block;
     & > p {
       margin-bottom: 6px;
     }
   }
-
+  &-cart-lists {
+    @include flex-col;
+    gap: 20px;
+  }
   &-cart-size {
     @include flex-center-ver;
     gap: 20px;
@@ -157,6 +165,55 @@
       font-size: 14px;
       line-height: 20px;
       font-weight: 700;
+    }
+  }
+}
+/* MyOrder.scss */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  font-size: 16px;
+}
+
+th,
+td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ccc;
+  & > svg {
+    cursor: pointer;
+  }
+}
+
+th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+.my-order {
+  & > h4 {
+    text-transform: uppercase;
+    font-size: 18px;
+    font-weight: 800;
+    line-height: 24px;
+    color: #000;
+  }
+  & > a {
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 700;
+    background-color: #070b21;
+    border: 0;
+    border-radius: 2px;
+    color: #fff;
+    padding: 12px 32px;
+    margin-top: 10px;
+    transition: opacity 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    &:hover {
+      opacity: 0.9;
     }
   }
 }

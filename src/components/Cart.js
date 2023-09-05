@@ -61,7 +61,7 @@ const Cart = ({ open, onClose }) => {
         </div>
         <div className="cart-total">
           <div className="cart-total-title">
-            Total <span>{`$${total}`}</span>
+            Estimated Total <span>{`$${total}`}</span>
           </div>
           <div className="cart-btn">
             <Link

@@ -1,5 +1,4 @@
 import cookie from "js-cookie";
-import { isEmpty } from "lodash";
 
 const ACCESS_TOKEN = "accessToken";
 
@@ -12,7 +11,7 @@ const getAccessToken = () => {
 const setAccessToken = (token) => {
   const accessToken = JSON.stringify(token);
   const expireDate = new Date();
-  expireDate.setMinutes(expireDate.getMinutes() + 5 * 60);
+  expireDate.setHours(expireDate.getHours() + 24);
 
   cookie.set(ACCESS_TOKEN, accessToken, {
     expires: expireDate,
@@ -24,9 +23,10 @@ const clearToken = () => {
 };
 
 const isValidAccessToken = () => {
-  const token = JSON.parse(cookie.get(ACCESS_TOKEN) || JSON.stringify(""));
+  const token = cookie.get(ACCESS_TOKEN);
 
-  return !isEmpty(token);
+  // Kiểm tra xem token có giá trị (không rỗng) và không phải là chuỗi rỗng
+  return token && token !== "";
 };
 
 export { setAccessToken, getAccessToken, clearToken, isValidAccessToken };

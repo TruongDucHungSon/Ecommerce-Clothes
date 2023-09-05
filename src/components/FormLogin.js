@@ -11,7 +11,7 @@ import {
   openLoginModal,
   openSignUpModal,
 } from "../features/modal/modalSlice";
-import { setUserData } from "../features/auth/authSlice";
+import { clearUserData, setUserData } from "../features/auth/authSlice";
 const schema = yup
   .object({
     firstName: yup.string().min(1),
@@ -52,9 +52,8 @@ export default function Login() {
         data: { ...data },
       });
 
-      if (isEmpty(token)) return console.log("Dang nhap that bai");
+      if (isEmpty(token)) return dispatch(clearUserData());
       else {
-        console.log("dang nhap thanh cong");
         setAccessToken(token);
         dispatch(setUserData({ _id, token, username, lastname, email }));
         dispatch(closeSigninModal());

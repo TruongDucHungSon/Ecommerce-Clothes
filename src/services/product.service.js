@@ -19,4 +19,9 @@ export const product = {
       method: "GET",
       url: `product/${id}`,
     }),
+  postProductFavorite: () =>
+    http.request({
+      method: "POST",
+      url: `product/favorite`,
+    }),
 };

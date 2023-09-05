@@ -3,6 +3,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { fetchApiData } from "../features/product/productSlice";
+import { ROUTES } from "../utils/routes";
 
 const displayNav = [
   {
@@ -12,8 +13,8 @@ const displayNav = [
   },
   {
     id: 2,
-    display: "Discover",
-    path: "/",
+    display: "Order",
+    path: `${ROUTES.YOURORDER}`,
   },
   {
     id: 3,

@@ -1,5 +1,7 @@
 import React from "react";
 import imgProduct from "../assets/img/type0.avif";
+import { Link } from "react-router-dom";
+import { category } from "./../services/category.service";
 
 const displayTypeProducts = [
   {
@@ -44,7 +46,7 @@ const displayTypeProducts = [
   },
 ];
 
-const TypeProducts = ({ category }) => {
+const TypeProducts = () => {
   return (
     <section className="type">
       <div className="type-desc">
@@ -52,16 +54,6 @@ const TypeProducts = ({ category }) => {
           Clothing / <span>Woman</span>
         </p>
         <h5 className="type-title">WOMEN'S CLOTHES</h5>
-      </div>
-      <div className="type-list">
-        {displayTypeProducts.map((item) => (
-          <a href="/" className="type-item " key={item.id}>
-            <div className="type-img">
-              <img src={item.imgSrc} alt={item.nameType} />
-            </div>
-            <h5 className="type-name">{item.nameType}</h5>
-          </a>
-        ))}
       </div>
     </section>
   );

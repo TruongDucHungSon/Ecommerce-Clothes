@@ -6,7 +6,7 @@ const Logo = ({ className }) => {
   return (
     <h1>
       <Link to={ROUTES.HOME} className={`header-item ${className}`}>
-        SonKhan's
+        SonTruong's
       </Link>
     </h1>
   );

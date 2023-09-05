@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const cartSlice = createSlice({
   name: "cart",
   initialState: {
+    oders: null,
     carts: [],
     total: 0, // Thêm giá trị total vào initialState
   },
@@ -46,11 +47,15 @@ const cartSlice = createSlice({
         0
       );
     },
+    clearCart: (state) => {
+      state.carts = [];
+      state.total = 0;
+    },
   },
 });
 
 // Trong cartSlice.js
 
-export const { addToCart, removeFromCart } = cartSlice.actions;
+export const { addToCart, removeFromCart, clearCart } = cartSlice.actions;
 
 export default cartSlice.reducer;

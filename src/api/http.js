@@ -20,6 +20,7 @@ http.interceptors.request.use(
     }
 
     const token = getAccessToken();
+    console.log(token);
     config.headers.Authorization = !isEmpty(token) ? `Bearer ${token}` : "";
     return config;
   },

@@ -12,6 +12,7 @@
     margin-bottom: 32px;
   }
   &-item {
+    flex-direction: column;
     scroll-snap-align: start;
     width: calc(100% / 6 - 32px);
     flex: none;
