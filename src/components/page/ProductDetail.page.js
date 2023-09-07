@@ -10,7 +10,7 @@ import {
 } from "../../features/product/productSlice";
 import { useParams } from "react-router-dom";
 import { addToCart } from "./../../features/cart/CartSlice";
-
+import { useLocation } from "react-router-dom";
 // or only core styles
 
 const displayBtn = [
@@ -34,6 +34,10 @@ const ProductDetail = () => {
   useEffect(() => {
     dispatch(fetchProductDetail(id));
   }, [id]);
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   const [quatity, setquatity] = useState(1);
   const [activeItemId, setActiveItemId] = useState(0);

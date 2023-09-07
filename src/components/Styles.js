@@ -22,7 +22,7 @@ const Styles = () => {
             1024: { slidesPerView: 6, spaceBetween: 32 },
           }}
         >
-          {productsNewArivals?.map((item) => (
+          {productsNewArivals?.slice(10, 19).map((item) => (
             <SwiperSlide key={item?._id}>
               <Product
                 id={item?._id}

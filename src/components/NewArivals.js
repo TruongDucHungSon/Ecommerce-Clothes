@@ -23,7 +23,7 @@ const NewArivals = () => {
             1024: { slidesPerView: 6, spaceBetween: 32 },
           }}
         >
-          {productsNewArivals?.map((item) => (
+          {productsNewArivals?.slice(0, 10)?.map((item) => (
             <SwiperSlide key={item?._id}>
               <Product
                 id={item?._id}

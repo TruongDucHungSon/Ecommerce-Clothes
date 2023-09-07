@@ -24,12 +24,7 @@ const displayBuild = [
     content: "Shop",
     path: "Accessories",
   },
-  {
-    id: 4,
-    image: `${imgBuild2}`,
-    content: "Shop",
-    path: "Accessories",
-  },
+  
 ];
 
 const Build = () => {
