@@ -115,3 +115,21 @@
   color: #6e6e6e;
   text-decoration: underline;
 }
+
+.header-items-cart {
+  position: relative;
+  & > span {
+    @include flex-center-ver;
+    justify-content: center;
+    position: absolute;
+    top: 35%;
+    font-size: 12px;
+    left: 83%;
+    transform: translate(-50%, -50%);
+    width: 18px;
+    height: 18px;
+    color: #fff;
+    border-radius: 50%;
+    background-color: #bb0000;
+  }
+}

@@ -24,22 +24,24 @@ const Sidebar = ({ open, close }) => {
       </div>
 
       <div className="sidebar">
-        <div className="sidebar-header">
-          <p>Category</p> <GrFormSubtract />
-        </div>
+        <div style={{ position: "sticky", top: "0" }}>
+          <div className="sidebar-header">
+            <p>Category</p> <GrFormSubtract />
+          </div>
 
-        <div className="sidebar-action">
-          <div className="sidebar-lists">
-            {category?.map((item) => (
-              <Link
-                className="sidebar-category"
-                key={item._id}
-                to={`/product/category/${item._id}`}
-                onClick={() => dispatch(fetchProductByCategory(item._id))}
-              >
-                {`${item.name} `}
-              </Link>
-            ))}
+          <div className="sidebar-action">
+            <div className="sidebar-lists">
+              {category?.map((item) => (
+                <Link
+                  className="sidebar-category"
+                  key={item._id}
+                  to={`/product/category/${item._id}`}
+                  onClick={() => dispatch(fetchProductByCategory(item._id))}
+                >
+                  {`${item.name} `}
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
       </div>

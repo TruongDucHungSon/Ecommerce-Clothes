@@ -18,6 +18,7 @@ import { clearUserData } from "../features/auth/authSlice";
 import { clearToken, isValidAccessToken } from "../utils/cookieStorage";
 
 const Header = () => {
+  const cartItems = useSelector((state) => state.cart.carts);
   const user = useSelector((state) => state.auth.userData);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -97,11 +98,14 @@ const Header = () => {
                 onClick={checkAuth}
                 style={{ cursor: "pointer" }}
               />
-              <HiOutlineShoppingBag
-                size={24}
-                onClick={handleOpenBag}
-                style={{ cursor: "pointer" }}
-              />
+              <div className="header-items-cart">
+                <HiOutlineShoppingBag
+                  size={24}
+                  onClick={handleOpenBag}
+                  style={{ cursor: "pointer" }}
+                />
+                <span>{cartItems?.length || 0}</span>
+              </div>
             </div>
           </div>
         </nav>

@@ -47,7 +47,7 @@ const Cart = ({ open, onClose }) => {
                 <div className="cart-size">
                   <p>Size: {item.size}</p>
                   <span className="w-full p-2 border border-gray-300 rounded">
-                    {item.quantity}
+                    Quantity: {item.quantity}
                   </span>
                 </div>
                 <div className="cart-subtotal">

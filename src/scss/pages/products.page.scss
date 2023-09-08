@@ -93,12 +93,14 @@
 // * sidebar
 
 .sidebar {
+  position: sticky;
+  top: 0;
   @include laptop {
     width: 100%;
   }
   &-box {
+    height: auto;
     padding-right: 20px;
-    height: 100vh;
     @include laptop {
       position: fixed;
       top: 0;
@@ -206,7 +208,6 @@
   &-secound {
     display: flex;
     gap: 21px;
-    align-items: flex-start;
   }
   &-img {
     width: 100%;

@@ -6,9 +6,13 @@ import { CgSearch } from "react-icons/cg";
 import { GrClose } from "react-icons/gr";
 import { Link } from "react-router-dom";
 import { ROUTES } from "./../utils/routes";
+import { useDispatch } from "react-redux";
+import { openLoginModal, openSignUpModal } from "../features/modal/modalSlice";
+import { useSelector } from "react-redux";
 
-const HeaderMobile = ({ onOpen, openModal }) => {
+const HeaderMobile = ({ onOpen }) => {
   const [openNav, SetOpenNav] = useState(false);
+  const cartItems = useSelector((state) => state.cart.carts);
 
   const handleOpenNav = () => {
     SetOpenNav(true);
@@ -17,6 +21,13 @@ const HeaderMobile = ({ onOpen, openModal }) => {
     SetOpenNav(false);
   };
 
+  const dispatch = useDispatch();
+  const handOpenLogin = () => {
+    dispatch(openLoginModal());
+  };
+  const handOpenSignUp = () => {
+    dispatch(openSignUpModal());
+  };
   return (
     <div className="header-mb-group">
       {/* Header  */}
@@ -25,7 +36,14 @@ const HeaderMobile = ({ onOpen, openModal }) => {
         <Logo />
         <div className="header-mb-ic">
           <CgSearch />
-          <HiOutlineShoppingBag onClick={onOpen} />
+          <div className="header-items-cart">
+            <HiOutlineShoppingBag
+              size={24}
+              onClick={onOpen}
+              style={{ cursor: "pointer" }}
+            />
+            <span>{cartItems?.length || 0}</span>
+          </div>
         </div>
       </header>
       <div
@@ -70,8 +88,10 @@ const HeaderMobile = ({ onOpen, openModal }) => {
             </li>
           </ul>
           <div className="button-box header-mb-bottom">
-            <Link className="button header-mb-link">Log in</Link>
-            <Link className="button header-mb-link" onClick={openModal}>
+            <Link className="button header-mb-link" onClick={handOpenLogin}>
+              Log in
+            </Link>
+            <Link className="button header-mb-link" onClick={handOpenSignUp}>
               Sign Up
             </Link>
           </div>
