@@ -18,7 +18,7 @@ import { clearUserData } from "../features/auth/authSlice";
 import { clearToken, isValidAccessToken } from "../utils/cookieStorage";
 
 const Header = () => {
-  const cartItems = useSelector((state) => state.cart.carts);
+const cartItems = useSelector((state) => state.cart.carts);
   const user = useSelector((state) => state.auth.userData);
   const dispatch = useDispatch();
   const navigate = useNavigate();

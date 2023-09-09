@@ -55,7 +55,6 @@ const HeaderMobile = ({ onOpen }) => {
           <div className="header-mb-top">
             <Logo className="header-mb-logo" />
             <div className="header-mb-ic">
-              <CgSearch />
               <GrClose onClick={handleCloseNav} />
             </div>
           </div>
