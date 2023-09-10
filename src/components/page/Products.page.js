@@ -77,7 +77,11 @@ const ProductsPage = () => {
   }
 
   if (error) {
-    return <p>Error: {error}</p>;
+    return (
+      <div>
+        <p>Error: {error}</p>
+      </div>
+    );
   }
   return (
     <>

@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import { selectproducts } from "../features/product/productSlice";
 const Styles = () => {
   const productsNewArivals = useSelector(selectproducts);
+  console.log(productsNewArivals);
   return (
     <div className="container">
       <Title>STYLES YOU MAY LIKE</Title>
