@@ -1,5 +1,4 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { FooterList } from "./Footer/constant";
 import Collapse from "./primitive/Collapse";
 

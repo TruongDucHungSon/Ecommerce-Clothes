@@ -16,6 +16,7 @@ import {
   PURGE,
   REGISTER,
 } from "redux-persist";
+
 const persistConfig = {
   key: "root",
   version: 1,
@@ -31,6 +32,7 @@ const rootReducer = combineReducers({
   modal: modalReducer,
   order: orderReducer,
 });
+
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const store = configureStore({

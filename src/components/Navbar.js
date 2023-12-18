@@ -1,7 +1,7 @@
 // Navbar.js
 import React from "react";
-import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import { fetchApiData } from "../features/product/productSlice";
 import { ROUTES } from "../utils/routes";
 
@@ -19,7 +19,7 @@ const displayNav = [
   {
     id: 3,
     display: "Secondhand",
-    path: "/",
+    path: "/product?page=1",
   },
 ];
 
