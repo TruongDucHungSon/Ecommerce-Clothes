@@ -7,10 +7,10 @@ import {
   selectProductDetail,
   setActiveImageIndex,
   selectActiveImageIndex,
-} from "../../features/product/productSlice";
+} from "../../features/product/productSlice"; 
 import { useParams } from "react-router-dom";
 import { addToCart } from "./../../features/cart/CartSlice";
-import { useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom"; 
 // or only core styles
 
 const displayBtn = [
