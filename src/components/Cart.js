@@ -7,14 +7,60 @@ import { removeFromCart } from "../features/cart/CartSlice";
 import { isValidAccessToken } from "../utils/cookieStorage";
 import { ROUTES } from "./../utils/routes";
 import { openLoginModal } from "../features/modal/modalSlice";
+
+const CartItem = ({ item, onRemoveItem }) => {
+  return (
+    <div className="cart-product" key={`product-inBagCart-${item.id}`}>
+      <div className="cart-img">
+        <img src={item.images[0]} alt="" />
+      </div>
+      <div className="cart-desc">
+        <p className="cart-name">
+          {item.name}{" "}
+          <GrClose
+            style={{ cursor: "pointer" }}
+            onClick={() => onRemoveItem(item.id)}
+          />
+        </p>
+        <p className="cart-decription">Odeon - Medium Wash</p>
+        <p className="cart-price">
+          {`$${item.price}`} <del>89.50</del>
+        </p>
+        <div className="cart-size">
+          <p>Size: {item.size}</p>
+          <span className="w-full p-2 border border-gray-300 rounded">
+            Quantity: {item.quantity}
+          </span>
+        </div>
+        <div className="cart-subtotal">
+          <p>
+            Subtotal: <span>${item.subTotal}</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const Cart = ({ open, onClose }) => {
   const navigate = useNavigate();
-
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.carts);
   const total = useSelector((state) => state.cart.total);
+
   const handleRemoveItem = (itemId) => {
     dispatch(removeFromCart(itemId));
+  };
+
+  const handleContinueCheckout = (e) => {
+    e.preventDefault();
+    const isValidToken = isValidAccessToken();
+
+    if (isValidToken) {
+      navigate(ROUTES.ORDER);
+    } else {
+      dispatch(openLoginModal());
+    }
   };
 
   return (
@@ -28,35 +74,11 @@ const Cart = ({ open, onClose }) => {
           <h4 className="cart-ship">Ship</h4>
           {/* product item bag cart here */}
           {cartItems?.map((item) => (
-            <div className="cart-product" key={`product-inBagCart-${item.id}`}>
-              <div className="cart-img">
-                <img src={item.images[0]} alt="" />
-              </div>
-              <div className="cart-desc">
-                <p className="cart-name">
-                  {item.name}{" "}
-                  <GrClose
-                    style={{ cursor: "pointer" }}
-                    onClick={() => handleRemoveItem(item.id)}
-                  />
-                </p>
-                <p className="cart-decription">Odeon - Medium Wash</p>
-                <p className="cart-price">
-                  {`$${item.price}`} <del>89.50</del>
-                </p>
-                <div className="cart-size">
-                  <p>Size: {item.size}</p>
-                  <span className="w-full p-2 border border-gray-300 rounded">
-                    Quantity: {item.quantity}
-                  </span>
-                </div>
-                <div className="cart-subtotal">
-                  <p>
-                    Subtotal: <span>${item.subTotal}</span>
-                  </p>
-                </div>
-              </div>
-            </div>
+            <CartItem
+              key={item.id}
+              item={item}
+              onRemoveItem={handleRemoveItem}
+            />
           ))}
         </div>
         <div className="cart-total">
@@ -64,17 +86,7 @@ const Cart = ({ open, onClose }) => {
             Estimated Total <span>{`$${total}`}</span>
           </div>
           <div className="cart-btn">
-            <Link
-              to="/"
-              onClick={(e) => {
-                e.preventDefault();
-                const isValidToken = isValidAccessToken();
-
-                if (isValidToken) return navigate(ROUTES.ORDER);
-
-                dispatch(openLoginModal());
-              }}
-            >
+            <Link to="/" onClick={handleContinueCheckout}>
               Continue to checkout
             </Link>
           </div>
