@@ -1,6 +1,7 @@
 import React from "react";
 import { GrClose } from "react-icons/gr";
 
+
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { removeFromCart } from "../features/cart/CartSlice";
