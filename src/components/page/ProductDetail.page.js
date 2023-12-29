@@ -178,7 +178,7 @@ const ProductDetail = () => {
         <div className="page-detail-description-primary">
           A modern take on a vintage staple, this Baby Blue Sweater Vest will
           see you through seasonal transitions with ease. Wear it on its own to
-          stay warm on summer nights, then layer it with a long sleeve T-shirt
+          stay warm on summer nights, then layer it with a long sleeve T-shirts
           once colder weather sneaks back in. It's semi-tailored, like a
           button-up vest, and yet soft yet, like a sweatshirt. Win-win.
           <p>A modern take on a vintage staple for a sleeveless open knit</p>
