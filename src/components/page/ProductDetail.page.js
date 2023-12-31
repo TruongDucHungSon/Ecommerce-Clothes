@@ -7,10 +7,10 @@ import {
   selectProductDetail,
   setActiveImageIndex,
   selectActiveImageIndex,
-} from "../../features/product/productSlice"; 
+} from "../../features/product/productSlice";
 import { useParams } from "react-router-dom";
 import { addToCart } from "./../../features/cart/CartSlice";
-import { useLocation } from "react-router-dom"; 
+import { useLocation } from "react-router-dom";
 // or only core styles
 
 const displayBtn = [
@@ -178,9 +178,9 @@ const ProductDetail = () => {
         <div className="page-detail-description-primary">
           A modern take on a vintage staple, this Baby Blue Sweater Vest will
           see you through seasonal transitions with ease. Wear it on its own to
-          stay warm on summer nights, then layer it with a long sleeve T-shirt
+          stay warm on summer nights, then layer it with a long sleeve T-shirts
           once colder weather sneaks back in. It's semi-tailored, like a
-          button-up vest, and yet soft, like a sweatshirt. Win-win.
+          button-up vest, and yet soft yet, like a sweatshirt. Win-win.
           <p>A modern take on a vintage staple for a sleeveless open knit</p>
           <p>A layering piece you can also wear on its own Soft yet tailored</p>
           <p>Amber yellow Style # A42470001 Color: Amber Yellow</p>
