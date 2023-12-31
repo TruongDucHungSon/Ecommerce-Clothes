@@ -42,9 +42,15 @@ const ProductDetail = () => {
   const [quatity, setquatity] = useState(1);
   const [activeItemId, setActiveItemId] = useState(0);
   const [activeButtonId, setActiveButtonId] = useState(null);
+
+  const [cartItems, setCartItems] = useState([]);
+  const [selectedSize, setSelectedSize] = useState(null); // Theo dõi kích thước đã chọn
+
   const handleItemClick = (itemId) => {
     setActiveItemId(itemId);
+    setSelectedSize(productDetail.size[itemId]); // Cập nhật kích thước đã chọn
   };
+
   const handleButtonClick = (btnId) => {
     setActiveButtonId(btnId);
   };
@@ -63,17 +69,39 @@ const ProductDetail = () => {
   };
 
   const handleAddToCart = () => {
+    if (selectedSize === null) {
+      // Xử lý trường hợp không có kích thước nào được chọn
+      alert("Vui lòng chọn một kích thước");
+      return;
+    }
+
     const itemToAdd = {
       id: productDetail._id,
       images: productDetail.images,
       name: productDetail.name,
       price: productDetail.price,
-      size: productDetail.size[activeItemId],
+      size: selectedSize, // Sử dụng kích thước đã chọn
       stock: productDetail.stock,
       quantity: quatity,
     };
 
+    // Kiểm tra xem mục với cùng kích thước đã tồn tại trong giỏ hàng chưa
+    const existingItemIndex = cartItems.findIndex(
+      (item) => item.id === itemToAdd.id && item.size === itemToAdd.size
+    );
+
+    if (existingItemIndex !== -1) {
+      // Nếu mục với cùng kích thước đã tồn tại, tăng số lượng
+      const updatedCartItems = [...cartItems];
+      updatedCartItems[existingItemIndex].quantity += quatity;
+      setCartItems(updatedCartItems);
+    } else {
+      // Nếu mục với cùng kích thước chưa tồn tại, thêm vào giỏ hàng
+      setCartItems((prevItems) => [...prevItems, itemToAdd]);
+    }
+
     dispatch(addToCart({ newItem: itemToAdd, quantity: quatity }));
+    setSelectedSize(null); // Reset kích thước đã chọn sau khi thêm vào giỏ hàng
   };
   if (!productDetail) {
     return <p>Loading...</p>;
