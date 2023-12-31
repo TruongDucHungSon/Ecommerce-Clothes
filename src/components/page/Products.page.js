@@ -6,34 +6,37 @@ import ProductsPageItem from "../ProductsPageItem";
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchApiData,
-  selectproducts,
+  selectProducts,
 } from "../../features/product/productSlice";
 import { useNavigate, useLocation } from "react-router-dom";
-import { MdKeyboardArrowRight } from "react-icons/md";
-import { MdKeyboardArrowLeft } from "react-icons/md";
-import { fetchProductByCategory } from "../../features/product/productSlice";
+import { MdKeyboardArrowRight, MdKeyboardArrowLeft } from "react-icons/md";
 import {
+  fetchProductByCategory,
   fetchCategories,
   selectCategories,
-} from "../../features/category/categorySlice";
+} from "../../features/product/productSlice";
+
 const ProductsPage = () => {
   const [openSidebar, setOpenSidebar] = useState(false);
+
   const handleOpenSidebar = () => {
     setOpenSidebar(true);
   };
 
-  const location = useLocation();
-  const queryParams = new URLSearchParams(location.search);
-  const categoryId = queryParams.get("category");
   const handleCloseSidebar = () => {
     setOpenSidebar(false);
   };
+
   const navigate = useNavigate();
-  const { loading, error, currentPage, totalPages, totalProducts, pageSize } =
-    useSelector((state) => state.api);
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const categoryId = queryParams.get("category");
+
+  const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(fetchCategories());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     if (categoryId) {
@@ -41,14 +44,29 @@ const ProductsPage = () => {
     } else {
       dispatch(fetchApiData());
     }
-  }, [categoryId]);
+  }, [categoryId, dispatch]);
 
-  const dispatch = useDispatch();
-  const renderPageNumbers = () => {
-    const pageNumbers = [];
-    for (let i = 1; i <= totalPages; i++) {
-      pageNumbers.push(i);
+  const {
+    loading,
+    error,
+    currentPage,
+    totalPages,
+    totalProducts,
+    pageSize,
+  } = useSelector((state) => state.api);
+
+  const product = useSelector(selectProducts);
+  const category = useSelector(selectCategories);
+
+  const handlePageChange = (newPage) => {
+    if (newPage >= 1 && newPage <= totalPages) {
+      dispatch(fetchApiData({ page: newPage }));
+      navigate(`/product?page=${newPage}&pageSize=${pageSize}`);
     }
+  };
+
+  const renderPageNumbers = () => {
+    const pageNumbers = Array.from({ length: totalPages }, (_, index) => index + 1);
 
     return pageNumbers.map((pageNumber) => (
       <button
@@ -62,15 +80,6 @@ const ProductsPage = () => {
       </button>
     ));
   };
-  const product = useSelector(selectproducts);
-  const category = useSelector(selectCategories);
-
-  const handlePageChange = (newPage) => {
-    if (newPage >= 1 && newPage <= totalPages) {
-      dispatch(fetchApiData({ page: newPage }));
-      navigate(`/product?page=${newPage}&pageSize=${pageSize}`);
-    }
-  };
 
   if (loading) {
     return <p>Loading...</p>;
@@ -83,6 +92,7 @@ const ProductsPage = () => {
       </div>
     );
   }
+
   return (
     <>
       <TypeProducts category={category} />
