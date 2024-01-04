@@ -23,37 +23,52 @@ const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [openBagCart, setOpenBagCart] = useState(false);
-  // * handle open Bag Cart
+  const [searchQuery, setSearchQuery] = useState('');
+
   const handleOpenBag = () => {
     setOpenBagCart(true);
   };
+
   const handleCloseBag = () => {
     setOpenBagCart(false);
   };
-  // * handle open modal Form
+
   const handleOpenSignInModal = () => {
     dispatch(openLoginModal());
   };
+
   const handleopenSignUpModal = () => {
     dispatch(openSignUpModal());
   };
+
   const checkAuth = () => {
     const isValidToken = isValidAccessToken();
     if (isValidToken) return navigate("/favorite");
     dispatch(openLoginModal());
   };
+
   const handleLogout = () => {
     clearToken();
     dispatch(clearUserData());
     window.location.reload();
   };
+
+  const allProducts = useSelector((state) => state.products.allProducts);
+  const filteredProducts = allProducts.filter((product) =>
+    product.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const handleSearch = () => {
+    // Perform actions with the searchQuery, e.g., navigate to search results page
+    navigate(`/search?q=${searchQuery}`);
+  };
+
   return (
     <>
       <SignUp />
       <Login />
       <HeaderMobile onClose={handleCloseBag} onOpen={handleOpenBag} />
       <div className="header-group">
-        {/* Header */}
         <div className="button-group">
           <div className="button-box container">
             {user ? (
@@ -79,17 +94,22 @@ const Header = () => {
             </div>
           </div>
         </div>
-        {/* NavBar */}
         <nav className="container header">
-          <Navbar />
+          <Navbar products={searchQuery ? filteredProducts : allProducts} />
           <Logo />
           <div className="header-box">
             <div className="header-icon">
-              <CgSearch size={22} />
+              <CgSearch
+                size={22}
+                onClick={handleSearch}
+                style={{ cursor: "pointer" }}
+              />
               <Input
                 className="header-input"
                 type="text"
                 placeholder="What are you looking for?"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
               />
             </div>
             <div className="header-action ">
@@ -99,13 +119,15 @@ const Header = () => {
                 style={{ cursor: "pointer" }}
               />
               <div className="header-items-cart" onClick={handleOpenBag}>
-                <HiOutlineShoppingBag size={24} style={{ cursor: "pointer" }} />
+                <HiOutlineShoppingBag
+                  size={24}
+                  style={{ cursor: "pointer" }}
+                />
                 <span>{cartItems?.length || 0}</span>
               </div>
             </div>
           </div>
         </nav>
-        {/* Bag Cart */}
       </div>
       <Cart open={openBagCart} onClose={handleCloseBag} />
     </>
