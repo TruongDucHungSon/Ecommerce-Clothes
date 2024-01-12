@@ -6,28 +6,33 @@ import ProductsPageItem from "../ProductsPageItem";
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchApiData,
-  selectproducts,
-  fetchProductByCategory,
-} from "../../features/product/productSlice";
+  selectProducts,
+  } from "../../features/product/productSlice";
 import { useNavigate, useLocation } from "react-router-dom";
-import { MdKeyboardArrowRight } from "react-icons/md";
-import { MdKeyboardArrowLeft } from "react-icons/md";
+import { MdKeyboardArrowRight, MdKeyboardArrowLeft } from "react-icons/md";
 import {
+fetchProductByCategory,
   fetchCategories,
   selectCategories,
-} from "../../features/category/categorySlice";
+} from "../../features/product/productSlice";
 
 const ProductsPage = () => {
   const [openSidebar, setOpenSidebar] = useState(false);
-  const dispatch = useDispatch();
-  const location = useLocation();
-  const queryParams = new URLSearchParams(location.search);
-  const categoryId = queryParams.get("category");
+  
+  const handleOpenSidebar = () => {
+    setOpenSidebar(true);
+  };
+
   const handleCloseSidebar = () => {
     setOpenSidebar(false);
   };
 
   const navigate = useNavigate();
+const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const categoryId = queryParams.get("category");
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchCategories());
@@ -41,25 +46,52 @@ const ProductsPage = () => {
     }
   }, [categoryId, dispatch]);
 
-  const renderPageNumbers = () => {
-    const pageNumbers = [];
-    for (let i = 1; i <= totalPages; i++) {
-      pageNumbers.push(
-        <span
-          key={i}
-          onClick={() => handlePageChange(i)}
-          className={currentPage === i ? "active" : ""}
-        >
-          {i}
-        </span>
-      );
+  const {
+    loading,
+    error,
+    currentPage,
+    totalPages,
+    totalProducts,
+    pageSize,
+  } = useSelector((state) => state.api);
+
+  const product = useSelector(selectProducts);
+  const category = useSelector(selectCategories);
+
+  const handlePageChange = (newPage) => {
+    if (newPage >= 1 && newPage <= totalPages) {
+      dispatch(fetchApiData({ page: newPage }));
+      navigate(`/product?page=${newPage}&pageSize=${pageSize}`);
     }
-    return pageNumbers;
   };
 
-  const handlePageChange = (pageNumber) => {
-    // Xử lý thay đổi trang ở đây
+  const renderPageNumbers = () => {
+    const pageNumbers = Array.from({ length: totalPages }, (_, index) => index + 1);
+
+    return pageNumbers.map((pageNumber) => (
+      <button
+          key={pageNumber}
+          onClick={() => handlePageChange(pageNumber)}
+          className={`pagination-number ${
+          currentPage === pageNumber ? "pagination-number-active" : ""
+        }`}
+        >
+          {pageNumber}
+      </button>
+    ));
   };
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
+  if (error) {
+    return (
+      <div>
+        <p>Error: {error}</p>
+      </div>
+    );
+  }
 
   return (
     <>
@@ -79,7 +111,7 @@ const ProductsPage = () => {
           <Sidebar open={openSidebar} close={handleCloseSidebar} />
           <div className="product-page-secound-box">
             <div className="product-page-lists">
-              {products?.map((item) => (
+              {product?.map((item) => (
                 <ProductsPageItem
                   key={item._id}
                   id={item._id}
