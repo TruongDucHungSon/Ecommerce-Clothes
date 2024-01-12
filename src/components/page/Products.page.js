@@ -6,15 +6,15 @@ import ProductsPageItem from "../ProductsPageItem";
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchApiData,
-  selectProducts,
+  fetchProductByCategory,
+  selectProducts,  // Make sure to import this from the correct location
 } from "../../features/product/productSlice";
 import { useNavigate, useLocation } from "react-router-dom";
 import { MdKeyboardArrowRight, MdKeyboardArrowLeft } from "react-icons/md";
 import {
-  fetchProductByCategory,
   fetchCategories,
   selectCategories,
-} from "../../features/product/productSlice";
+} from "../../features/category/categorySlice";
 
 const ProductsPage = () => {
   const [openSidebar, setOpenSidebar] = useState(false);
@@ -23,16 +23,23 @@ const ProductsPage = () => {
     setOpenSidebar(true);
   };
 
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const categoryId = queryParams.get("category");
   const handleCloseSidebar = () => {
     setOpenSidebar(false);
   };
 
   const navigate = useNavigate();
-  const location = useLocation();
-  const queryParams = new URLSearchParams(location.search);
-  const categoryId = queryParams.get("category");
-
   const dispatch = useDispatch();
+  const {
+    loading,
+    error,
+    currentPage,
+    totalPages,
+    totalProducts,
+    pageSize,
+  } = useSelector((state) => state.api);
 
   useEffect(() => {
     dispatch(fetchCategories());
@@ -44,29 +51,13 @@ const ProductsPage = () => {
     } else {
       dispatch(fetchApiData());
     }
-  }, [categoryId, dispatch]);
-
-  const {
-    loading,
-    error,
-    currentPage,
-    totalPages,
-    totalProducts,
-    pageSize,
-  } = useSelector((state) => state.api);
-
-  const product = useSelector(selectProducts);
-  const category = useSelector(selectCategories);
-
-  const handlePageChange = (newPage) => {
-    if (newPage >= 1 && newPage <= totalPages) {
-      dispatch(fetchApiData({ page: newPage }));
-      navigate(`/product?page=${newPage}&pageSize=${pageSize}`);
-    }
-  };
+  }, [dispatch, categoryId]);
 
   const renderPageNumbers = () => {
-    const pageNumbers = Array.from({ length: totalPages }, (_, index) => index + 1);
+    const pageNumbers = [];
+    for (let i = 1; i <= totalPages; i++) {
+      pageNumbers.push(i);
+    }
 
     return pageNumbers.map((pageNumber) => (
       <button
@@ -81,10 +72,19 @@ const ProductsPage = () => {
     ));
   };
 
+  const product = useSelector(selectProducts);  // Make sure to use the correct selector
+  const category = useSelector(selectCategories);
+
+  const handlePageChange = (newPage) => {
+    if (newPage >= 1 && newPage <= totalPages) {
+      dispatch(fetchApiData({ page: newPage }));
+      navigate(`/product?page=${newPage}&pageSize=${pageSize}`);
+    }
+  };
+
   if (loading) {
     return <p>Loading...</p>;
   }
-
   if (error) {
     return (
       <div>
