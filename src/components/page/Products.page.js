@@ -7,18 +7,19 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   fetchApiData,
   selectProducts,
-  } from "../../features/product/productSlice";
+  fetchProductByCategory,
+} from "../../features/product/productSlice";
 import { useNavigate, useLocation } from "react-router-dom";
 import { MdKeyboardArrowRight, MdKeyboardArrowLeft } from "react-icons/md";
 import {
-fetchProductByCategory,
   fetchCategories,
   selectCategories,
-} from "../../features/product/productSlice";
+} from "../../features/category/categorySlice";
 
 const ProductsPage = () => {
   const [openSidebar, setOpenSidebar] = useState(false);
-  
+  const dispatch = useDispatch();
+
   const handleOpenSidebar = () => {
     setOpenSidebar(true);
   };
@@ -27,12 +28,9 @@ const ProductsPage = () => {
     setOpenSidebar(false);
   };
 
-  const navigate = useNavigate();
-const location = useLocation();
+  const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const categoryId = queryParams.get("category");
-
-  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchCategories());
@@ -46,52 +44,12 @@ const location = useLocation();
     }
   }, [categoryId, dispatch]);
 
-  const {
-    loading,
-    error,
-    currentPage,
-    totalPages,
-    totalProducts,
-    pageSize,
-  } = useSelector((state) => state.api);
-
-  const product = useSelector(selectProducts);
-  const category = useSelector(selectCategories);
-
-  const handlePageChange = (newPage) => {
-    if (newPage >= 1 && newPage <= totalPages) {
-      dispatch(fetchApiData({ page: newPage }));
-      navigate(`/product?page=${newPage}&pageSize=${pageSize}`);
-    }
-  };
+  const products = useSelector(selectProducts);
+  const totalProducts = products.length;
 
   const renderPageNumbers = () => {
-    const pageNumbers = Array.from({ length: totalPages }, (_, index) => index + 1);
-
-    return pageNumbers.map((pageNumber) => (
-      <button
-          key={pageNumber}
-          onClick={() => handlePageChange(pageNumber)}
-          className={`pagination-number ${
-          currentPage === pageNumber ? "pagination-number-active" : ""
-        }`}
-        >
-          {pageNumber}
-      </button>
-    ));
+    // Logic to render page numbers
   };
-
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-
-  if (error) {
-    return (
-      <div>
-        <p>Error: {error}</p>
-      </div>
-    );
-  }
 
   return (
     <>
@@ -111,7 +69,7 @@ const location = useLocation();
           <Sidebar open={openSidebar} close={handleCloseSidebar} />
           <div className="product-page-secound-box">
             <div className="product-page-lists">
-              {product?.map((item) => (
+              {products.map((item) => (
                 <ProductsPageItem
                   key={item._id}
                   id={item._id}
