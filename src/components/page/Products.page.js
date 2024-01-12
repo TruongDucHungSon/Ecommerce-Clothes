@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   fetchApiData,
   fetchProductByCategory,
-  selectProducts,  // Make sure to import this from the correct location
+  selectProducts,
 } from "../../features/product/productSlice";
 import { useNavigate, useLocation } from "react-router-dom";
 import { MdKeyboardArrowRight, MdKeyboardArrowLeft } from "react-icons/md";
@@ -18,6 +18,7 @@ import {
 
 const ProductsPage = () => {
   const [openSidebar, setOpenSidebar] = useState(false);
+  const dispatch = useDispatch();
 
   const handleOpenSidebar = () => {
     setOpenSidebar(true);
@@ -31,15 +32,6 @@ const ProductsPage = () => {
   };
 
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const {
-    loading,
-    error,
-    currentPage,
-    totalPages,
-    totalProducts,
-    pageSize,
-  } = useSelector((state) => state.api);
 
   useEffect(() => {
     dispatch(fetchCategories());
@@ -52,6 +44,25 @@ const ProductsPage = () => {
       dispatch(fetchApiData());
     }
   }, [dispatch, categoryId]);
+
+  const {
+    loading,
+    error,
+    currentPage,
+    totalPages,
+    totalProducts,
+    pageSize,
+  } = useSelector((state) => state.api);
+
+  const product = useSelector(selectProducts);
+  const category = useSelector(selectCategories);
+
+  const handlePageChange = (newPage) => {
+    if (newPage >= 1 && newPage <= totalPages) {
+      dispatch(fetchApiData({ page: newPage }));
+      navigate(`/product?page=${newPage}&pageSize=${pageSize}`);
+    }
+  };
 
   const renderPageNumbers = () => {
     const pageNumbers = [];
@@ -70,16 +81,6 @@ const ProductsPage = () => {
         {pageNumber}
       </button>
     ));
-  };
-
-  const product = useSelector(selectProducts);  // Make sure to use the correct selector
-  const category = useSelector(selectCategories);
-
-  const handlePageChange = (newPage) => {
-    if (newPage >= 1 && newPage <= totalPages) {
-      dispatch(fetchApiData({ page: newPage }));
-      navigate(`/product?page=${newPage}&pageSize=${pageSize}`);
-    }
   };
 
   if (loading) {
