@@ -1,5 +1,4 @@
-import React from "react";
-const Input = ({ type, className, placeholder, min, max, label, name }) => {
+const Input = ({ type, className, placeholder, min, max, label, name, value, onChange, onBlur, onFocus }) => {
   return (
     <>
       <label>{label}</label>
@@ -10,6 +9,10 @@ const Input = ({ type, className, placeholder, min, max, label, name }) => {
         min={min}
         max={max}
         name={name}
+        value={value}
+        onChange={onChange}
+        onBlur={onBlur}
+        onFocus={onFocus}
       ></input>
     </>
   );
