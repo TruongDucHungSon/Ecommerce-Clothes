@@ -149,4 +149,4 @@ export const selectProductDetail = (state) => state.api.productDetail;
 
 export const selectActiveImageIndex = (state) => state.api.activeImageIndex;
 
-export default apiSlice.reducer;
+export default apiSlice.reducer ;
