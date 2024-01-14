@@ -4,9 +4,9 @@ import Logo from "./Logo";
 import { TbHeart } from "react-icons/tb";
 import { HiOutlineShoppingBag } from "react-icons/hi";
 import { CgSearch } from "react-icons/cg";
-import { GrLocationPin } from "react-icons/gr";
+import { GrLocationPin, GrRefresh } from "react-icons/gr";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Cart from "./Cart";
 import HeaderMobile from "./Header.mobile";
 import SignUp from "./FormSingup";
@@ -16,13 +16,46 @@ import { openLoginModal, openSignUpModal } from "../features/modal/modalSlice";
 import { useSelector } from "react-redux";
 import { clearUserData } from "../features/auth/authSlice";
 import { clearToken, isValidAccessToken } from "../utils/cookieStorage";
+import SearchBox from "./SearchBox";
+import useDebounce from "../hooks/useDebounce";
+import { filterProduct, updateSearchResults } from "../features/product/productSlice";
 
 const Header = () => {
   const cartItems = useSelector((state) => state.cart.carts);
+  const searchResults = useSelector((state) => state.api.searchResults);
+  const searchResultsLoading = useSelector((state) => state.api.searchResultsLoading);
   const user = useSelector((state) => state.auth.userData);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [openBagCart, setOpenBagCart] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
+  const debounce = useDebounce(searchValue, 500);
+  const [showResult, setShowResult] = useState(false);
+  const searchBox = useRef();
+
+  useEffect(() => {
+    if(searchValue.trim().length !== 0) {
+      dispatch(filterProduct({name: searchValue}));
+    } else {
+      dispatch(updateSearchResults([]))
+    }
+  }, [debounce]);
+
+  useEffect(() => {
+
+    let timeout;
+
+    if(showResult && searchResults.length !== 0) {
+      searchBox.current.style.display = "block";
+    } else {
+      timeout = setTimeout(() => {
+        searchBox.current.style.display = "none";
+      }, 200);
+    }
+
+    return () => clearTimeout(timeout);
+  }, [showResult, searchResults]);
+
   // * handle open Bag Cart
   const handleOpenBag = () => {
     setOpenBagCart(true);
@@ -47,6 +80,11 @@ const Header = () => {
     dispatch(clearUserData());
     window.location.reload();
   };
+
+  const handleSearchValue = (e) => {
+    setSearchValue(e.target.value);
+  }
+  
   return (
     <>
       <SignUp />
@@ -90,7 +128,13 @@ const Header = () => {
                 className="header-input"
                 type="text"
                 placeholder="What are you looking for?"
+                value={searchValue}
+                onChange={handleSearchValue}
+                onFocus={() => setShowResult(true)}
+                onBlur={() => setShowResult(false)}
               />
+              {searchResultsLoading && <GrRefresh className="spin" />}
+              <SearchBox useRef={searchBox} list={searchResults}/>
             </div>
             <div className="header-action ">
               <TbHeart
