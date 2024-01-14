@@ -90,7 +90,7 @@ const Header = () => {
       <SignUp />
       <Login />
       <HeaderMobile onClose={handleCloseBag} onOpen={handleOpenBag} />
-      <div className="header-group">
+<div className="header-group">
         {/* Header */}
         <div className="button-group">
           <div className="button-box container">
