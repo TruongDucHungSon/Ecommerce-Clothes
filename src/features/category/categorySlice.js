@@ -9,7 +9,7 @@ export const fetchCategories = createAsyncThunk(
     return response;
   }
 );
-// fix
+
 const categorySlice = createSlice({
   name: "category",
   initialState: {

@@ -4,11 +4,11 @@ export const order = {
   getOrders: () =>
     http.request({
       method: "GET",
-      url: "oder",
+      url: "order",
     }),
   deleteOrder: (id) =>
     http.request({
       method: "DELETE",
-      url: `oder/${id}`,
+      url: `order/${id}`,
     }),
 };
